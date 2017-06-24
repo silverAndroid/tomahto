@@ -62,9 +62,10 @@ function closeTabs(tabs) {
 
 function closeTab(tabID, index) {
     return new Promise(function(resolve) {
-        setTimeout(chrome.tabs.remove, generateRandomTime(PREFS.minTime, PREFS.maxTime), tabID, function() {
-            playAudio(index === 0 ? 'you_played_yourself.mp3' : 'another_one.mp3');
-            resolve();
+        setTimeout(playAudio, generateRandomTime(PREFS.minTime, PREFS.maxTime), index === 0 ? 'you_played_yourself.mp3' : 'another_one.mp3', function() {
+            chrome.tabs.remove(tabID, function() {
+                resolve();
+            });
         });
     });
 }
@@ -73,10 +74,11 @@ function generateRandomTime(min, max) {
     return (Math.random() * (max - min) + min) * 1000;
 }
 
-function playAudio(path) {
+function playAudio(path, callback) {
     var audio = new Audio();
     audio.src = path;
     audio.play();
+    callback();
 }
 
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
