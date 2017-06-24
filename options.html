@@ -55,7 +55,16 @@
         display: none;
       }
 
+       #time-interval-error {
+        color: red;
+        display: none;
+      }
+
       #save-successful.show, #time-format-error.show {
+        display: inline;
+      }
+
+      #save-successful.show, #time-interval-error.show {
         display: inline;
       }
 
@@ -125,7 +134,8 @@
         </label>
         <input id="max-duration" type="text" size="2" />
         <span class="minutes" data-i18n="minutes"></span>
-        <span id="time-format-error" data-i18n="options_time_format_error"></span> 
+        <span id="time-format-error" data-i18n="options_time_format_error"></span>
+        <span id="time-interval-error" data-i18n="options_time_interval_error"></span> 
       </div>
       <div>
         <input id="should-ring" type="checkbox" />

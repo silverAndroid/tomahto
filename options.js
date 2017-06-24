@@ -25,6 +25,7 @@ var form = document.getElementById('options-form'),
   whitelistEl = document.getElementById('blacklist-or-whitelist'), //the picker of "block" or "allow"
   saveSuccessfulEl = document.getElementById('save-successful'), // text next to submit button
   timeFormatErrorEl = document.getElementById('time-format-error'), // prolly nother thing
+  timeIntervalErrorEl = document.getElementById('time-interval-error'), // prolly nother thing
   background = chrome.extension.getBackgroundPage(), // the chrome window with ALL the tabs
   startCallbacks = {}, durationEls = {};
 
@@ -56,7 +57,8 @@ form.onsubmit = function () {
   // console.log(durations.toString());
   if (parseInt(durations["maxTime"]) < parseInt(durations["minTime"])) 
   {
-    timeFormatErrorEl.className = 'show';
+    timeIntervalErrorEl.className = 'show';
+    // timeFormatErrorEl.className = 'show';
       return false;
   }
   
@@ -77,6 +79,7 @@ whitelistEl.onchange = formAltered;
 function formAltered() {
   saveSuccessfulEl.removeAttribute('class');
   timeFormatErrorEl.removeAttribute('class');
+  timeIntervalErrorEl.removeAttribute('class');
 }
 
 siteListEl.value = background.PREFS.sites.join("\n");
