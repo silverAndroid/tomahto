@@ -1,6 +1,6 @@
 {
   "ext_name": {
-    "message": "Tohmato Options",
+    "message": "Tomahto Options",
     "description": "Name of the extension"
   },
   "ext_description": {
@@ -67,8 +67,12 @@
     "description": "On the options page, label for the checkbox that enables/disables the notification at the end of a timer"
   },
   "options_should_ring": {
-    "message": "Mute audio",
-    "description": "On the options page, label for the checkbox that enables/disables ringing sound at the end of a timer"
+    "message": "Mute audio?",
+    "description": "On the options page, label for the checkbox that technically enables/disables DJ Khaled's voice..."
+  },
+  "options_should_ring_psych": {
+    "message": "Sorry, DJ Khaled is too extra to be silenced.",
+    "description": "On the options page, label for the checkbox that technically enables/disables DJ Khaled's voice..."
   },
   "options_click_restarts": {
     "message": "Clicking on a running timer restarts it",
