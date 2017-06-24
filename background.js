@@ -92,6 +92,15 @@ function setState(state){
 	currentState = state;
 }
 
+function savePrefs(prefs) {
+  localStorage['prefs'] = JSON.stringify(prefs);
+  return prefs;
+}
+
+function setPrefs(prefs) {
+  PREFS = savePrefs(prefs);
+  return prefs;
+}
 
 chrome.tabs.onUpdated.addListener (function (tabId, changeInfo, tab) {
   setState(stateEnum.POMODORO);
