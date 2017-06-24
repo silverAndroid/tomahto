@@ -1,4 +1,4 @@
-![Alt text](./icons/icon128.png?raw=true "Optional Title")
+![Alt text](./bigBabyTohmato.png?raw=true "Optional Title")
 
 # Tomahto 
 Chrome extension to end all Chrome extensions. You could say it's a pretty "Chrummy" extension 😉
