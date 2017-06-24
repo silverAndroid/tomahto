@@ -9,8 +9,11 @@ function prefs() {
             'tumblr.com',
             'instagram.com',
             'reddit.com',
-            'amazon.ca'
-        ]
+            'amazon.ca',
+            'messenger.com'
+        ],
+        minTime: 1,
+        maxTime: 10
     }
 }
 
@@ -20,7 +23,6 @@ function init() {
     };
 
     chrome.tabs.query(queryInfo, function (tabs) {
-        // console.log(getUnblockedTabs(tabs));
         closeTabs(getUnblockedTabs(tabs));
     });
 }
@@ -56,9 +58,13 @@ function closeTabs(tabs) {
 }
 
 function closeTab(tabID) {
-    chrome.tabs.remove(tabID, function () {
+    setTimeout(chrome.tabs.remove, generateRandomTime(PREFS.minTime, PREFS.maxTime), tabID, function() {
         console.log('Kyle\'s dum');
     });
+}
+
+function generateRandomTime(min, max) {
+    return (Math.random() * (max - min) + min) * 1000;
 }
 
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
