@@ -47,12 +47,8 @@
     "description": "On the options page, the message above the site list (with the block/only-allow dropdown before it)"
   },
   "options_site_list_info": {
-    "message": "Enter one site per line, like \"youtube.com\" or \"google.com/reader/\". We'll block/allow all URLs with that base.",
+    "message": "Enter one site per line, like \"youtube.com\" or \"google.com/reader/\". We'll block/allow all URLs with the relevant base domain.",
     "description": "On the options page, explains what the site list does"
-  },
-  "options_site_list_syntax": {
-    "message": "For example, \"mail.example.com\" won't match \"www.example.com\", but \"example.com\" will match both. Similarly, \"google.com/reader/\" will match Google Reader, but will not match Google Search, Gmail, or any other Google service.",
-    "description": "On the options page, explains the details of the syntax of the site list"
   },
   "options_min_block_info": {
     "message": "To remove temptation, some options cannot be edited during a work session. Patience, please.",

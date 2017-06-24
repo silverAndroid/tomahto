@@ -1,5 +1,10 @@
 var PREFS = prefs();
 
+stateEnum = {
+    POMODORO : 0,
+    BREAK : 1
+}
+
 function prefs() {
     return {
         sites: [
@@ -13,7 +18,9 @@ function prefs() {
             'messenger.com'
         ],
         minTime: 1,
-        maxTime: 4
+        maxTime: 4,
+        pomodoroTime: 60,
+        breakTime: 10 
     }
 }
 
@@ -42,7 +49,7 @@ function domainsMatch(test, against) {
 }
 
 function isChromeURL(url) {
-    return url.startsWith('chrome://');
+    return url.startsWith('chrome');
 }
 
 function isDomainBlocked(testSite) {
@@ -62,9 +69,10 @@ function closeTabs(tabs) {
 
 function closeTab(tabID, index) {
     return new Promise(function(resolve) {
-        setTimeout(chrome.tabs.remove, generateRandomTime(PREFS.minTime, PREFS.maxTime), tabID, function() {
-            playAudio(index === 0 ? 'you_played_yourself.mp3' : 'another_one.mp3');
-            resolve();
+        setTimeout(playAudio, generateRandomTime(PREFS.minTime, PREFS.maxTime), index === 0 ? 'you_played_yourself.mp3' : 'another_one.mp3', function() {
+            chrome.tabs.remove(tabID, function() {
+                resolve();
+            });
         });
     });
 }
@@ -73,15 +81,32 @@ function generateRandomTime(min, max) {
     return (Math.random() * (max - min) + min) * 1000;
 }
 
-function playAudio(path) {
+function playAudio(path, callback) {
     var audio = new Audio();
     audio.src = path;
     audio.play();
+    callback();
 }
 
-chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
+function setState(state){
+	currentState = state;
+}
+
+function savePrefs(prefs) {
+  localStorage['prefs'] = JSON.stringify(prefs);
+  return prefs;
+}
+
+function setPrefs(prefs) {
+  PREFS = savePrefs(prefs);
+  return prefs;
+}
+
+chrome.tabs.onUpdated.addListener (function (tabId, changeInfo, tab) {
+  setState(stateEnum.POMODORO);
   if (changeInfo.status === 'complete') {
-    // do your things
-    init();
+  	if (currentState === stateEnum.POMODORO) {
+    	init();
+  	}
   }
 });
