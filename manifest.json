@@ -4,7 +4,7 @@
   "name": "Tomahto",
   "description": "This extension closes random tabs",
   "version": "1.0",
-
+  "default_locale": "en",
   "browser_action": {
     "default_icon": "icon.png"
   },
