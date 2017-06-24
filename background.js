@@ -49,7 +49,7 @@ function domainsMatch(test, against) {
 }
 
 function isChromeURL(url) {
-    return url.startsWith('chrome://');
+    return url.startsWith('chrome');
 }
 
 function isDomainBlocked(testSite) {

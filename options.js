@@ -37,18 +37,6 @@ var TIME_REGEX = /^([0-9]+)(:([0-9]{2}))?$/;
 form.onsubmit = function () {
   console.log("form submitted");
   var durations = {}, duration, durationStr, durationMatch;
-  
-  // if (minDurationMatch && maxDurationMatch && minTime <= maxTime) 
-  // {
-  //   console.log(durationMatch);
-  //   durations[key] = (60 * parseInt(durationMatch[1], 10));
-  //   if(durationMatch[3]) {
-  //      durations[key] += parseInt(durationMatch[3], 10);
-  //   }
-  // } else {
-  //   timeFormatErrorEl.className = 'show';
-  //   return false;
-  //  } 
 
   for(var key in durationEls) {
     durationStr = durationEls[key].value;
@@ -76,10 +64,9 @@ form.onsubmit = function () {
   console.log(durations);
   
   background.setPrefs({
-    siteList:           siteListEl.value.split(/\r?\n/),
-    durations:          durations,
-    shouldRing:         shouldRingEl.checked,
-    whitelist:          whitelistEl.selectedIndex == 1
+    sites:           siteListEl.value.split(/\r?\n/),
+    minTime:         durations["min"],
+    maxTime:         durations["max"]
   })
   saveSuccessfulEl.className = 'show';
   return false;
@@ -94,7 +81,7 @@ function formAltered() {
   timeFormatErrorEl.removeAttribute('class');
 }
 
-siteListEl.value = background.PREFS.siteList.join("\n");
+siteListEl.value = background.PREFS.sites.join("\n");
 shouldRingEl.checked = background.PREFS.shouldRing;
 whitelistEl.selectedIndex = background.PREFS.whitelist ? 1 : 0;
 
