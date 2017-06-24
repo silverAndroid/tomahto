@@ -38,10 +38,6 @@
     "message": "Allow",
     "description": "On options page, the dropdown option that indicates the sites are a blacklist"
   },
-  // "options_whitelist_verb": {
-  //   "message": "Only allow",
-  //   "description": "On options page, the dropdown option that indicates the sites are a whitelist"
-  // },
   "options_site_list_header": {
     "message": "the sites on this list:",
     "description": "On the options page, the message above the site list (with the block/only-allow dropdown before it)"
@@ -49,6 +45,10 @@
   "options_site_list_info": {
     "message": "Enter one site per line, like \"youtube.com\" or \"google.com/reader/\". We'll block/allow all URLs with the relevant base domain.",
     "description": "On the options page, explains what the site list does"
+  },
+  "options_time_syntax": {
+    "message": "Please enter your time either as MM or MM:SS.",
+    "description": "How to enter time"
   },
   "options_min_block_info": {
     "message": "To remove temptation, some options cannot be edited during a work session. Patience, please.",
