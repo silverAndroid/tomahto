@@ -25,6 +25,7 @@ var form = document.getElementById('options-form'),
   whitelistEl = document.getElementById('blacklist-or-whitelist'), //the picker of "block" or "allow"
   saveSuccessfulEl = document.getElementById('save-successful'), // text next to submit button
   timeFormatErrorEl = document.getElementById('time-format-error'), // prolly nother thing
+  muteAudioEl = document.getElementById('should-ring'),
   background = chrome.extension.getBackgroundPage(), // the chrome window with ALL the tabs
   startCallbacks = {}, durationEls = {};
 
@@ -113,6 +114,12 @@ startCallbacks.min = function () {
 startCallbacks.max = function () {
   document.body.removeAttribute('class');
   setInputDisabled(false);
+}
+
+muteAudioEl.onchange = function() {
+  if (this.checked) {
+    background.playAudio('you_played_yourself.mp3');
+  }
 }
 
 // if(background.mainPomodoro.mostRecentMode == 'min') {
