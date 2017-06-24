@@ -1,5 +1,10 @@
 var PREFS = prefs();
 
+stateEnum = {
+    POMODORO : 0,
+    BREAK : 1
+}
+
 function prefs() {
     return {
         sites: [
@@ -13,7 +18,9 @@ function prefs() {
             'messenger.com'
         ],
         minTime: 1,
-        maxTime: 4
+        maxTime: 4,
+        pomodoroTime: 60,
+        breakTime: 10 
     }
 }
 
@@ -81,9 +88,16 @@ function playAudio(path, callback) {
     callback();
 }
 
-chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
+function setState(state){
+	currentState = state;
+}
+
+
+chrome.tabs.onUpdated.addListener (function (tabId, changeInfo, tab) {
+  setState(stateEnum.POMODORO);
   if (changeInfo.status === 'complete') {
-    // do your things
-    init();
+  	if (currentState === stateEnum.POMODORO) {
+    	init();
+  	}
   }
 });
