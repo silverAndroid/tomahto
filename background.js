@@ -13,7 +13,7 @@ function prefs() {
             'messenger.com'
         ],
         minTime: 1,
-        maxTime: 10
+        maxTime: 4
     }
 }
 
@@ -52,19 +52,31 @@ function isDomainBlocked(testSite) {
 }
 
 function closeTabs(tabs) {
-    tabs.forEach(function(tab) {
-        closeTab(tab.id);
+    var p = Promise.resolve();
+    tabs.forEach(function(tab, index) {
+        p = p.then(function() {
+            return closeTab(tab.id, index);
+        });
     })    
 }
 
-function closeTab(tabID) {
-    setTimeout(chrome.tabs.remove, generateRandomTime(PREFS.minTime, PREFS.maxTime), tabID, function() {
-        console.log('Kyle\'s dum');
+function closeTab(tabID, index) {
+    return new Promise(function(resolve) {
+        setTimeout(chrome.tabs.remove, generateRandomTime(PREFS.minTime, PREFS.maxTime), tabID, function() {
+            playAudio(index === 0 ? 'you_played_yourself.mp3' : 'another_one.mp3');
+            resolve();
+        });
     });
 }
 
 function generateRandomTime(min, max) {
     return (Math.random() * (max - min) + min) * 1000;
+}
+
+function playAudio(path) {
+    var audio = new Audio();
+    audio.src = path;
+    audio.play();
 }
 
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
